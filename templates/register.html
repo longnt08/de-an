@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/css/login-register.css" rel="stylesheet" />
+    <title>Register</title>
+    <style>
+      body {
+        background-image: url('../static/images/city.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="v1_1">
+      <div class="v1_2">
+
+        <div class="flip-container">
+          <div class="flipper">
+            <div class="front">
+              <img src="../static/images/v1_3.png" alt="Logo" width="500px" />
+            </div>
+            <div class="back">
+              <span class="v1_4">Welcome to </span>
+              <span class="v1_5">Tenant Management System</span>
+              <span class="v1_6">Enter your information below to continue</span>
+            </div>
+          </div>
+        </div>
+
+        {% if error %}
+        <p style="color: red;">{{error}}</p>
+        {% endif %}
+        
+        <form action="{{url_for('register')}}" method="POST">
+
+          <!-- get email -->
+          <div class="v1_7">
+            <label for="register_email" class="v1_8">Email</label>
+            <input class="v1_9" id="email" name="email" type="email" placeholder="Enter your email ..." required/>
+          </div>
+
+          <div class="v1_10">
+            <!-- get first name -->
+            <div class="v1_11">
+              <label for="firstName" class="v1_12">First name</label>
+              <input id="firstName" name="firstName" class="v1_13" type="text" required />
+            </div>
+            <!-- get last name  -->
+            <div class="v1_11">
+              <label for="lastName" class="v1_12">Last name</label>
+              <input id="lastName" name="lastName" class="v1_13" type="text" required />
+            </div>
+            <!-- get house number  -->
+            <div class="v1_11">
+              <label for="houseNum" class="v1_12">House number</label>
+              <input type="text" id="houseNum" name="houseNum" class="v1_13" required>
+            </div>
+            <!-- get phone  -->
+            <div class="v1_11">
+              <label for="phone" class="v1_12">Phone</label>
+              <input type="tel" id="phone" name="phone" class="v1_13" required>
+            </div>
+            <!-- get password  -->
+            <div class="v1_11">
+              <label for="password" class="v1_12">Create Password</label>
+                <input id="password" name="password" class="v1_15" type="password" required/>
+            </div>
+            <!-- confirm password  -->
+            <div class="v1_11">
+              <label for="confirmPassword" class="v1_12">Confirm Password</label>
+                <input id="confirmPassword" name="confirmPassword" class="v1_15" type="password" required/>
+            </div>
+            
+          </div>
+          <!-- get location  -->
+          <div class="v1_7">
+            <label for="location" class="v1_8">Your location</label>
+            <input class="v1_9" id="location" name="location" type="text" required/>
+          </div>
+
+          <div class="div-btn" style="display: flex; justify-content: center; padding-top: 10px;">
+            <button type="submit" class="v1_13" style="background-color: rgb(183, 152, 212); width: 200px; margin-right: 50px;">Create Account</button>
+            <button class="v1_13" style="width: 230; margin-right: -5px;"><a href="{{url_for('login')}}" style="text-decoration: none;">Already have an account? Log in</a></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

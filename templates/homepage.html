@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="../static/css/home.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="//use.fontawesome.com/releases/v5.0.7/css/all.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../static/css/infor.css" />
+    <title>Homepage</title>
+  </head>
+  <body>
+    <div class="v3_1">
+      <div class="v3_2">
+        <img src="../static/images/v1_3.png" />
+        <div
+          class="v3_3"
+          style="background-color: rgb(116, 175, 117); color: white">
+          News
+        </div>
+        <div class="v3_3">Services</div>
+        <div class="v3_3">Payment</div>
+        <div class="v3_3">About us</div>
+      </div>
+      <div class="v3_4">
+        <div class="v3_5">
+          <div class="v3_6">News</div>
+
+          <div class="profile-card">
+            <div class="profile-header">
+              <img
+                src="https://e.khoahoc.tv/photos/image/2022/01/13/lung-mat-3.jpg"
+                alt="Profile Picture"
+                class="profile-img"/>
+              <h2 class="user-name">{{username}}</h2>
+            </div>
+            <div class="profile-info">
+              <p><strong>House number: </strong>{{houseNum}}</p>
+              <p><strong>Email: </strong>{{email}}</p>
+              <p><strong>Phone: </strong>{{phone}}</p>
+              <p><strong>Location: </strong>{{location}}</p>
+            </div>
+            <div class="btn-container">
+              <div>
+                <button class="btn"><a href="#" style="text-decoration: none; color: white;">Edit Profile</a></button>
+              </div>
+              <div>
+                <button class="btn"><a href="{{url_for('logout')}}" style="text-decoration: none; color: white;">Log out</a></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="v3_7">
+            <img
+              src="https://e.khoahoc.tv/photos/image/2022/01/13/lung-mat-3.jpg"
+              style="border-radius: 50%"/>
+            <div class="v3_8">
+              <span class="v3_9">
+                <a class="tooltip"
+                  style="color: black; text-decoration: none"
+                  data-tooltip="User name: ARPHAM<br>Email: Oaichua@gmail.com">{{username}}</a>
+              </span>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="v3_11"></div>
+      </div>
+    </div>
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/infor.js"></script>
+  </body>
+</html>
