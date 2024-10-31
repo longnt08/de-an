@@ -7,6 +7,7 @@ from flask import (Flask,
                       url_for)
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
+import datetime
 
 app = Flask(__name__)
 
@@ -16,7 +17,8 @@ app.template_folder = 'templates'
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['HomeHub']
-users = db['users']
+users_collection = db['users']
+services_collection = db['services']
 
 # Login
 @app.route("/", methods=['POST', 'GET'])
@@ -26,7 +28,7 @@ def login():
         password = request.form['password']
 
         #find email in MongoDB
-        user = users.find_one({'email': email})
+        user = users_collection.find_one({'email': email})
         
         if user and check_password_hash(user['password'], password):
             session['logged_in'] = True
@@ -69,7 +71,6 @@ def homepage():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-
         firstName = request.form['firstName']
         lastName = request.form['lastName']
         username = "{} {}".format(firstName, lastName)
@@ -79,18 +80,15 @@ def register():
         location = request.form['location']
         password = request.form['password']
 
-        #Check if email already exists in the database
-        existing_email = users.find_one({"email": email})
+        existing_email = users_collection.find_one({"email": email})
 
         if existing_email:
             error = 'Email already exists'
             return render_template('register.html', error = error)
     
-        # hash the password for security
         hashed_password = generate_password_hash(password)
 
-        #Save the neu user in MongoDB
-        users.insert_one({
+        users_collection.insert_one({
             'username': username,
             'email': email,
             'password': hashed_password,
@@ -98,10 +96,8 @@ def register():
             'phone': phone,
             'location': location
         })
-
         flash('Registration successful! Please login')
         return redirect(url_for('login'))
-    
     return render_template('register.html')
 
 @app.route('/logout')
@@ -109,6 +105,31 @@ def logout():
     session['logged_id'] = False
     session['user'] = {}
     return redirect(url_for('login'))
+
+# Dang ky dich vu
+@app.route('/service', methods=['POST'])
+def service_registration():
+    service_name = request.args.get('name_services')
+    user_name = request.form['name']
+    house_number = request.form['address']
+    using_time = request.form['service_time'].value
+
+    if user_name and house_number and using_time:
+        services_collection.insert_one({
+            'service_name': service_name,
+            'user_name': user_name,
+            'house_number': house_number,
+            'using_time': using_time,
+            'registration_date': datetime.date()
+        })
+        
+        return redirect({{url_for('payment')}})
+    return render_template('homepage.html')
+
+# Payment
+@app.route('/payment', methods=['POST', 'GET'])
+def payment():
+    return render_template('payment.html')
 
 if __name__=='__main__':
     app.run(debug=True)
