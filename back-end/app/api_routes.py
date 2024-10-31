@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, session
+from flask import Blueprint, jsonify, request, session, render_template, make_response
 from pymongo import MongoClient
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -9,51 +9,46 @@ db = client['HomeHub']
 users_collection = db['users']
 services_collection = db['services']
 
-@api_routes.route("/login", methods=['POST', 'GET'])
-# def login():
-#     if request.method == 'POST':
-#         email = request.form['email']
-#         password = request.form['password']
-
-#         #find email in MongoDB
-#         user = users_collection.find_one({'email': email})
-        
-#         if user and check_password_hash(user['password'], password):
-#             session['logged_in'] = True
-#             session['user'] = {
-#                 'username': user['username'],
-#                 'email': user['email'],
-#                 'houseNum': user['houseNum'],
-#                 'phone': user['phone'],
-#                 'location': user['location']
-#             }
-#             return redirect(url_for('homepage'))
-#         else:
-#             error = 'Invalid credentials. Please try again.'
-#             return render_template('login.html', error=error)
-        
+# Home page
+# @api_routes.route("/")
+# def index():
 #     return render_template('login.html')
 
-# Home page
-# @api_routes.route("/homepage")
-# def homepage():
-#     if not session.get('logged_in'):
-#         return redirect(url_for('login'))
+@api_routes.route("/login", methods=['POST'])
+def login():
+    email = request.form['email']
+    password = request.form['password']
+
+    #find email in MongoDB
+    user = users_collection.find_one({'email': email})
     
-#     user = session.get('user', {})
+    if user and check_password_hash(user['password'], password):
+        session['logged_in'] = True
+        session['user'] = {
+            'username': user.get('username'),
+            'email': user.get('email'),
+            'houseNum': user.get('houseNum'),
+            'phone': user.get('phone'),
+            'location': user.get('location')
+        }
 
-#     username = user['username']
-#     email = user['email']
-#     phone = user['phone']
-#     houseNum = user['houseNum']
-#     location = user['location']
-
-#     return render_template('homepage.html',
-#                             username=username,
-#                             email=email,
-#                             phone=phone,
-#                             houseNum=houseNum,
-#                             location=location)
+        return jsonify({
+            "status": "success",
+            "message": "Login successfully"
+        })
+        
+    else:
+        return jsonify({
+            "status": "error",
+            "message": "Password don't match or user isn't exists"
+        }), 400
+        
+@api_routes.route('/get_user_info', methods=['GET'])
+def get_user_info():
+    if "user" in session:
+        return jsonify(session["user"])
+    else:
+        return jsonify({'error': "user not logged in"}), 401
 
 # Register
 @api_routes.route('/register', methods=['GET', 'POST'])

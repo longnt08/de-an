@@ -91,36 +91,6 @@
       </div>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const form = document.querySelector("form");
-        const emailInput = document.getElementById("email");
-        const firstNameInput = document.getElementById("firstName");
-        const lastNameInput = document.getElementById("lastName");
-        const houtNumInput = document.getElementById("houseNum");
-        const phoneInput = document.getElementById("phone");
-        const passwordInput = document.getElementById("password");
-        const confirmPasswordInput = document.getElementById("confirmPassword");
-        const locationInput = document.getElementById("location");
-
-        form.addEventListener("submit", async function (event) {
-          event.preventDefault();
-
-          // collect data
-          const formData = new FormData();
-          formData.append("email", emailInput.value);
-          formData.append("email", emailInput.value);
-          formData.append("firstName", firstNameInput.value);
-          formData.append("lastName", lastNameInput.value);
-          formData.append("houseNum", houseNumInput.value);
-          formData.append("phone", phoneInput.value);
-          formData.append("password", passwordInput.value);
-          formData.append("confirmPassword", confirmPasswordInput.value);
-          formData.append("location", locationInput.value);
-
-          // send POST request to the Flask API
-        })
-      })
-    </script>
+    <script src="./static/js/register.js"></script>
   </body>
 </html>
