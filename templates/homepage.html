@@ -12,21 +12,21 @@
     <title>Homepage</title>
   </head>
   <body>
-    <div class="v3_1">
-      <div class="v3_2">
+    <div class="container-home"> <!--v3_1-->
+      <div class="header"> <!--v3_2-->
         <img src="../static/images/v1_3.png" />
         <div
-          class="v3_3"
+          class="header-link active" 
           style="background-color: rgb(116, 175, 117); color: white">
           News
         </div>
-        <div class="v3_3">Services</div>
-        <div class="v3_3">Payment</div>
-        <div class="v3_3">About us</div>
+        <div class="header-link">Services</div> <!--v3_3-->
+        <div class="header-link">Payment</div>
+        <div class="header-link">About us</div>
       </div>
-      <div class="v3_4">
-        <div class="v3_5">
-          <div class="v3_6">News</div>
+      <div class="main-content"> <!--v3_4-->
+        <div class="news-section"> <!--v3_5-->
+          <div class="section-title">News</div> <!--v3_6-->
 
           <div class="profile-card">
             <div class="profile-header">
@@ -52,12 +52,12 @@
             </div>
           </div>
 
-          <div class="v3_7">
+          <div class="notification-card"> <!--v3_7-->
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s"
               style="border-radius: 50%"/>
-            <div class="v3_8">
-              <span class="v3_9">
+            <div class="notification-info"> <!--v3_8-->
+              <span class="user-info"> <!--v3_9-->
                 <a class="tooltip"
                   style="color: black; text-decoration: none"
                   data-tooltip="User name: ARPHAM<br>Email: Oaichua@gmail.com">{{username}}</a>
@@ -67,7 +67,7 @@
           
         </div>
 
-        <div class="v3_11" id="v3_11"></div>
+        <div class="dynamic-content" id="dynamicContent"></div> <!--v3_11-->
       </div>
     </div>
     <script src="../static/js/main.js"></script>

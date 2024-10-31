@@ -1,6 +1,6 @@
 let div3_3 = document.getElementsByClassName("v3_3");
 let div3_6 = document.querySelector(".v3_6");
-let div3_11 = document.querySelector(".v3_11");
+let dynamicContent = document.querySelector(".v3_11");
 let deMuc = 0;
 news();
 console.log(div3_3[0]);
@@ -36,7 +36,7 @@ function chang3_11(option) {
   return 0;
 }
 function news() {
-  div3_11.innerHTML = `
+  dynamicContent = document.getElementById("dynamicContent").innerHTML = `
     <div class="news_1">
       <div class="news_1_1">TIN TỨC MỚI NHẤT</div>
 
@@ -52,13 +52,13 @@ function news() {
   window.addEventListener("resize", function () {
     News_1_2.setAttribute("style", `height: ${window.innerHeight - 173}px;`);
   });
-  div3_11.setAttribute("style", "border-radius: 10px;");
+  dynamicContent.setAttribute("style", "border-radius: 10px;");
 
 }
 
 // Trang service
 function services() {
-  div3_11.innerHTML = `
+  dynamicContent = document.getElementById("dynamicContent").innerHTML = `
   <div class="services_1">
     <img
       src="../static/images/Services_1.webp"
@@ -95,14 +95,14 @@ function services() {
     <span id="name_services">BOARDROOM</span>
   </div>`;
   for (let i = 0; i < 14; i++) {
-    div3_11.innerHTML += `<div class="services_1">
+    dynamicContent = document.getElementById("dynamicContent").innerHTML += `<div class="services_1">
     <img
       src="../static/images/services_3.png"
       style="max-width: 80%; max-height: 100%; margin: 10px auto"/>
     <span id="name_services">football field</span>
   </div>`;
   }
-  div3_11.setAttribute(
+  dynamicContent.setAttribute(
     "style",
     `height: ${
       window.innerHeight - 130
@@ -118,7 +118,7 @@ function services() {
 
 // Trang đăng ký dịch vụ
 function form(e) {
-  div3_11.innerHTML = `
+  dynamicContent = document.getElementById("dynamicContent").innerHTML = `
   <div class="services_form_1">
     <div class="services_form_1_1"><</div>
     <div class="services_form_1_2">ĐĂNG KÝ DỊCH VỤ</div>
@@ -151,7 +151,7 @@ function form(e) {
   services_form_1_1.onclick = function () {
     services();
   };
-  div3_11.setAttribute("style", "display: flex; flex-direction: column;");
+  dynamicContent.setAttribute("style", "display: flex; flex-direction: column;");
   services_form_2.setAttribute(
     "style",
     `background-color: rgba(255, 255, 255, 1);  border-radius: 6px; margin-top: 10px; width: 100%; height: ${
@@ -171,7 +171,8 @@ function form(e) {
 
 // Trang thanh toán
 function payment() {
-  let div3_11innerHTML = `<table class = "table">
+  dynamicContent = document.getElementById("dynamicContent");
+  dynamicContent.innerHTML = `<table class = "table">
     <thead>
       <tr>
         <th>STT</th>
@@ -184,7 +185,7 @@ function payment() {
     </thead>
     <tbody>`;
   for (let i = 0; i < 20; i++)
-    div3_11innerHTML += `<tr>
+    dynamicContent.innerHTML += `<tr>
         <td>${2 * i + 1}</td>
         <td>Pham Anh</td>
         <td>Sân bóng</td>
@@ -200,11 +201,11 @@ function payment() {
         <td>HN</td>
         <td>đã thanh toán</td>
       </tr>`;
-  div3_11innerHTML += `
+  dynamicContent.innerHTML += `
     </tbody>
   </table>`;
-  div3_11.innerHTML = div3_11innerHTML;
-  div3_11.setAttribute(
+  dynamicContent = document.getElementById("dynamicContent").innerHTML = dynamicContent.innerHTML;
+  dynamicContent.setAttribute(
     "style",
     `height: ${
       window.innerHeight - 130
@@ -213,7 +214,7 @@ function payment() {
     border-radius: 6px;`
   );
   window.addEventListener("resize", function () {
-    div3_11.setAttribute(
+    dynamicContent.setAttribute(
       "style",
       `height: ${
         window.innerHeight - 130
@@ -227,7 +228,7 @@ function payment() {
 // Trang About us
 
 function aboutUs() {
-  div3_11.innerHTML = `
+  dynamicContent = document.getElementById("dynamicContent").innerHTML = `
   <div class="container-abu">
     <!-- Tiêu đề chính -->
     <h1>Welcome to Sky Tower Apartments</h1>
@@ -266,7 +267,7 @@ function aboutUs() {
     </div>
   </div>
   `;
-  div3_11.setAttribute(
+  dynamicContent.setAttribute(
     "style",
     `height: ${
       window.innerHeight - 130
