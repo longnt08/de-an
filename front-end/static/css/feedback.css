@@ -1,0 +1,113 @@
+ .form-container {
+    width: 100%;
+    max-width: 500px;
+    height: 75vh;
+    padding: 20px;
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 25%;
+    border-radius: 8px;
+    transform: translateY(-5px);
+    animation: slide-in 0.8s ease-out;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  }
+  .feedback-container {
+    padding-top: 10px;
+    background-image: url('../images/city.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Form header */
+  .form-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .user-info {
+    margin: 10px 0 10px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Khoảng cách giữa các cột */
+  }
+  
+  .form-group {
+    flex-basis: 40%; /* Chiều rộng mỗi cột chiếm 48% của container */
+    display: flex;
+    flex-direction: column; /* Đảm bảo label nằm trên input */
+  }
+  
+  .user-info label {
+    margin-bottom: 5px; /* Khoảng cách giữa label và input */
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  .user-info input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 5px 0;
+  }
+  .btn-group {
+    display: grid;
+    grid-template-columns: 65% 35%;
+  }
+  
+  /* Input and select focus effect */
+  .form-container input:focus,
+  .form-container select:focus,
+  .form-container textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+
+  .btn-group label {
+    margin-left: 35px;
+  }
+
+  .btn-group textarea {
+    width: 90%;
+    height: 10vh;
+    margin-left: 30px;
+    padding: 10px;
+  }
+  
+  /* Submit button styling */
+  .btn-group button {
+    width: 80%;
+    margin-left: 20%;
+    padding: 12px;
+    margin-top: 30px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 50px;
+  }
+  
+  .form-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Smooth load animation */
+  @keyframes slide-in {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
+  

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="./static/css/home.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="//use.fontawesome.com/releases/v5.0.7/css/all.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="./static/css/infoCard.css" />
+    <link rel="stylesheet" href="./static/css/info.css">
+    <link rel="stylesheet" href="./static/css/feedback.css">
+    <link rel="stylesheet" href="./static/css/update_info.css">
+    <title>Homepage</title>
+  </head>
+  <body>
+    <div class="container-home"> 
+      <div class="header"> 
+        <img src="./static/images/v1_3.png" />
+        <div class="header-link active" style="background-color: rgb(116, 175, 117); color: white">
+          News
+        </div>
+        <div class="header-link">Services</div> 
+        <div class="header-link">Payment</div>
+        <div class="header-link">Feedback</div>
+        <div class="header-link">About us</div>
+      </div>
+      <div class="main-content"> 
+        <div class="main-section"> 
+          <div class="main-title">News</div> 
+
+          <div class="search-container">
+            <input type="text" placeholder="Search here...">
+            <button type="submit">Tìm kiếm</button>
+          </div>
+
+          <div class="profile-card">
+            <div class="profile-header">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s"
+                alt="Profile Picture"
+                class="profile-img"/>
+              <h2 class="user-name" id="userName"></h2>
+            </div>
+            <div class="profile-info">
+              <p id="houseNum"><strong>House number: </strong></p>
+              <p id="email"><strong>Email: </strong></p>
+              <p id="phone"><strong>Phone: </strong></p>
+              <p id="location"><strong>Location: </strong></p>
+            </div>
+            <div class="btn-container">
+              <div>
+                <button id="editProfileBtn" class="btn"><a style="text-decoration: none; color: white;">Edit Profile</a></button>
+              </div>
+              <div>
+                <button class="btn" id="logoutBtn">Log out</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-card"> 
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s"
+              style="border-radius: 50%; cursor: pointer;" id="infoLink"/>
+            <div class="notification-info"> 
+              <span class="user-info"> 
+                <a class="tooltip"
+                  style="color: black; text-decoration: none""></a>
+              </span>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="dynamic-content" id="dynamicContent"></div> <!--v3_11-->
+      </div>
+    </div>
+    <script src="./static/js/main.js"></script>
+    <script src="./static/js/index.js"></script>
+  </body>
+</html>

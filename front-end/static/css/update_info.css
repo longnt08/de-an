@@ -1,0 +1,90 @@
+/* Toàn bộ form */
+.update-container {
+    background-image: url('../images/city.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 30px;
+    height: 100%;
+}
+
+.edit-profile-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    transform: translateY(1px);
+    animation: slide-in 0.8s ease-out;
+  }
+  
+  /* Tiêu đề */
+  .edit-profile-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Thiết lập Flexbox cho form và khoảng cách giữa các cột */
+  .edit-profile-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  /* Thiết lập các nhóm input */
+  .form-update {
+    flex-basis: 48%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Định dạng label */
+  .form-update label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  /* Định dạng ô input */
+  .form-update input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-update input:focus {
+    border-color: #007bff; /* Đổi màu viền khi focus */
+    outline: none;
+  }
+  
+  /* Định dạng nút submit */
+  .edit-profile-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+  
+  .edit-profile-form button:hover {
+    background-color: #0056b3;
+  }
+  @keyframes slide-in {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }

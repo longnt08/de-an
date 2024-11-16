@@ -164,7 +164,7 @@ input::placeholder {
 }
 .v1_11 {
   width: 247px;
-  height: 79px;
+  height: 75px;
   margin-top: 5px;
   opacity: 1;
   overflow: hidden;
@@ -180,6 +180,7 @@ input::placeholder {
   border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
+  border: 1px solid black;
 }
 .div-btn button:hover {
   background-color: yellow;
@@ -201,6 +202,7 @@ input::placeholder {
   height: 50px;
   opacity: 1;
   overflow: hidden;
+  border: 1px solid black;
 }
 .v1_16 {
   width: 518px;
