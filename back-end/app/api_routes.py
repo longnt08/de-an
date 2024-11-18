@@ -148,7 +148,8 @@ def send_feedback():
             'phone': data['phone'],
             'email': data['email'],
             'content': data['feedback_content'],
-            'status': 'Pending'
+            'status': 'Pending',
+            'sent_date': datetime.now()
         }
 
         add_feedback = feedback_collection.insert_one(feedback_data)
@@ -196,12 +197,15 @@ def service_registration():
         service_name = data['service_name']
         houseNum = data['houseNum']
         using_time = data['using_time']
+        register_date = datetime.now()
 
         registration_data = {
             "service_name": service_name,
+            "user_id": user_id,
             "username": username,
             "houseNum": houseNum,
-            "using_time": using_time
+            "using_time": using_time,
+            "register_date": register_date
         }
 
         # luu thong tin tour dang ky vao collection registered services
@@ -233,23 +237,57 @@ def service_registration():
 def get_family_members():
     try:
         houseNum = request.args.get('houseNum')
+        user_id = request.args.get('user_id')
 
         if not houseNum:
             return jsonify({'message': 'houseNum parameter is missing'}), 400
+        
+        if not user_id:
+            return jsonify({'message': 'user id is missing'}), 400
 
+        # get family member
         family_members = users_collection.aggregate([
             {'$match': {'houseNum': houseNum}}
         ])
 
-        family_member_list = []
-        for member in family_members:
-            member['_id'] = str(member['_id'])
-            family_member_list.append(member)
+        family_member_list = [
+            {
+                **member,
+                '_id': str(member['_id'])
+            }
+            for member in family_members
+        ]
 
-        if family_member_list:
-            return jsonify(family_member_list), 200
-        else:
-            return jsonify({'message': 'No family members found'}), 400
+        # get registered service
+        services = registered_services.find({'user_id': user_id})
+
+        service_list = [
+            {
+                **service,
+                '_id': str(service['_id']),
+                'register_date': service['register_date'].strftime('%d-%m-%Y')
+            }
+            for service in services
+        ]
+
+        # get sent feedbacks
+        feedbacks = feedback_collection.find({'user_id': user_id})
+
+        sent_feedbacks = [
+            {
+                **feedback,
+                '_id': str(feedback['_id']),
+                'sent_date': feedback['sent_date'].strftime('%d-%m-%Y')
+            }
+            for feedback in feedbacks
+        ]
+
+        return jsonify({
+            'success': 'Get information successfully',
+            'family_members': family_member_list,
+            'registered_services': service_list,
+            'sent_feedbacks': sent_feedbacks
+        }), 200
 
     except Exception as e:
         return jsonify({'message': str(e)}), 500

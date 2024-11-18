@@ -144,7 +144,7 @@ function form(serviceName) {
                 <option value="120">2 hours</option>
             </select>
 
-            <button id="submitBtn" type="submit">Thanh Toán</button>
+            <button id="submitBtn" type="submit">Đăng ký</button>
         </form>
     </div>
   </div>`;
@@ -259,9 +259,9 @@ function feedback() {
         <label for="feedbackType" style="margin-left: 30px; font-weight: bold;">Loại phản hồi</label>
         <select id="feedbackType" name="feedbackType" style="width: 60%; margin-left: 30px;" required>
           <option value="" disabled selected>---</option>
-          <option value="suggestion">Đề xuất</option>
-          <option value="complaint">Phàn nàn</option>
-          <option value="other">Khác</option>
+          <option value="Đề xuất">Đề xuất</option>
+          <option value="Phàn nàn">Phàn nàn</option>
+          <option value="Khác">Khác</option>
         </select>
         
         <div class="user-info">
@@ -339,8 +339,9 @@ function feedback() {
   });
 }
 
+
 // sua thong tin ca nhan
-document.getElementById('editProfileBtn').addEventListener('click', function(e) {
+document.getElementById('editProfileBtn').addEventListener('click',  function(e) {
   e.preventDefault();
 
   dynamicContent.innerHTML = `
@@ -509,7 +510,7 @@ function checkAndHide() {
 
 
 // hàm tạo table thành viên gia đình
-function createTable(data) {
+function createFamilyTable(data) {
   const table = document.createElement('table');
   table.boder = "1";
 
@@ -553,9 +554,101 @@ function createTable(data) {
   return table;
 }
 
+// hàm tạo bảng các dịch vụ đã đăng ký
+function createServicesTable(service) {
+  const table = document.createElement('table');
+  table.boder = "1";
+
+  // tao tieu de cua bang
+  const headerRow = document.createElement('tr');
+  const headers = ['STT', 'Tên dịch vụ', 'Thời gian sử dụng', 'Ngày đăng ký']
+  headers.forEach(headerText => {
+    const th = document.createElement('th');
+    th.innerText = headerText;
+    headerRow.appendChild(th);
+  });
+  table.appendChild(headerRow);
+
+  // tao cac hang du lieu
+  service.forEach((item, index) => {
+    const row = document.createElement('tr');
+
+    // cot STT
+    const sttCell = document.createElement('td');
+    sttCell.innerText = index + 1;
+    row.appendChild(sttCell);
+
+    // cot Ten dich vu
+    const nameCell = document.createElement('td');
+    nameCell.innerText = item.service_name;
+    row.appendChild(nameCell);
+
+    // cot Thoi gian su dung
+    const phoneCell = document.createElement('td');
+    phoneCell.innerText = item.using_time;
+    row.appendChild(phoneCell);
+
+    // cot ngay dang ky
+    const relationCell = document.createElement('td');
+    relationCell.innerText = item.register_date;
+    row.appendChild(relationCell);
+
+    table.appendChild(row);
+  });
+
+  return table;
+}
+
+// hàm tạo table các phản hồi đã gửi
+function createFeecbackTable(feedback) {
+  const table = document.createElement('table');
+  table.boder = "1";
+
+  // tao tieu de cua bang
+  const headerRow = document.createElement('tr');
+  const headers = ['STT', 'Loại phản hồi', 'Nội dung', 'Ngày gửi']
+  headers.forEach(headerText => {
+    const th = document.createElement('th');
+    th.innerText = headerText;
+    headerRow.appendChild(th);
+  });
+  table.appendChild(headerRow);
+
+  // tao cac hang du lieu
+  feedback.forEach((item, index) => {
+    const row = document.createElement('tr');
+
+    // cot STT
+    const sttCell = document.createElement('td');
+    sttCell.innerText = index + 1;
+    row.appendChild(sttCell);
+
+    // cot loai phan hoi
+    const nameCell = document.createElement('td');
+    nameCell.innerText = item.type;
+    row.appendChild(nameCell);
+
+    // cot noi dung
+    const phoneCell = document.createElement('td');
+    phoneCell.innerText = item.content;
+    row.appendChild(phoneCell);
+
+    // cot ngay gui
+    const relationCell = document.createElement('td');
+    relationCell.innerText = item.sent_date;
+    row.appendChild(relationCell);
+
+    table.appendChild(row);
+  });
+
+  return table;
+}
+
 // trang info
 document.getElementById('infoLink').addEventListener('click', async function(e) {
   e.preventDefault();
+
+  const user_id = localStorage.getItem('user_id');
   const username = localStorage.getItem('username');
   const houseNum = localStorage.getItem('houseNum');
   const phone = localStorage.getItem('phone');
@@ -580,7 +673,7 @@ document.getElementById('infoLink').addEventListener('click', async function(e) 
         <div class="info-btn">
           <button><a href="/front-end/login.html" style="text-decoration: none; color: white;">Chuyển tài khoản</a></button>
           <button id="logoutBtn">Đăng xuất</button>
-          <button id="editProfileBtn">Sửa thông tin</button>
+          <button id="editProfileBtn" onclick="update_info()">Sửa thông tin</button>
         </div>
       </div>
     </div>
@@ -590,6 +683,7 @@ document.getElementById('infoLink').addEventListener('click', async function(e) 
   try {
     const url = new URL('http://127.0.0.1:5000/users/get_family_members');
     url.searchParams.append('houseNum', houseNum);
+    url.searchParams.append('user_id', user_id);
 
     const response = await fetch(url, {
       method: "GET",
@@ -605,15 +699,39 @@ document.getElementById('infoLink').addEventListener('click', async function(e) 
 
       // hien thi thanh vien trong gia dinh
       const titleFamily = document.createElement('h1');
-      titleFamily.innerText = 'Các thành viên trong gia đình'
+      titleFamily.innerText = 'Thành viên trong gia đình'
       const familyMemberDiv = document.createElement('div');
       familyMemberDiv.classList.add('familyMembers');
 
-      const familyMemberTable = createTable(data);
+      const familyMemberTable = createFamilyTable(data.family_members);
       familyMemberDiv.appendChild(titleFamily);
       familyMemberDiv.appendChild(familyMemberTable);
 
       dynamicContent.appendChild(familyMemberDiv);
+
+      // hien thi dich vu da dang ky
+      const titleService = document.createElement('h1');
+      titleService.innerText = 'Dịch vụ đã đăng ký';
+      const registeredServicesDiv = document.createElement('div');
+      registeredServicesDiv.classList.add('familyMembers');
+
+      const serviceTable = createServicesTable(data.registered_services);
+      registeredServicesDiv.appendChild(titleService);
+      registeredServicesDiv.appendChild(serviceTable);
+
+      dynamicContent.appendChild(registeredServicesDiv);
+
+      // hien thi phan hoi da gui
+      const titleFeecback = document.createElement('h1');
+      titleFeecback.innerText = 'Phản hồi đã gửi';
+      const sentFeedbacksDiv = document.createElement('div');
+      sentFeedbacksDiv.classList.add('familyMembers');
+
+      const feedbackTable = createFeecbackTable(data.sent_feedbacks);
+      sentFeedbacksDiv.appendChild(titleFeecback);
+      sentFeedbacksDiv.appendChild(feedbackTable);
+
+      dynamicContent.appendChild(sentFeedbacksDiv);
     }
   } catch(error) {
     console.error('Error:', error);
