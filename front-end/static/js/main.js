@@ -671,7 +671,7 @@ document.getElementById('infoLink').addEventListener('click', async function(e) 
         </div>
       
         <div class="info-btn">
-          <button><a href="/front-end/login.html" style="text-decoration: none; color: white;">Chuyển tài khoản</a></button>
+          <button><a href="/front-end/login.html" style="text-decoration: none; color: white;">Đăng nhập</a></button>
           <button id="logoutBtn">Đăng xuất</button>
           <button id="editProfileBtn" onclick="update_info()">Sửa thông tin</button>
         </div>
