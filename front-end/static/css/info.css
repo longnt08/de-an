@@ -1,0 +1,65 @@
+.infoContainer {
+    height: 50%;
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.infoImage {
+    background-color: aqua;
+    margin: 5px;
+    border-radius: 10px;
+}
+.infoImage img {
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.infoUser {
+    display: grid;
+    grid-template-rows: 80% 20%;
+}
+.infoText {
+    background-color: aqua;
+    margin: 5px;
+    border-radius: 10px;
+    padding-top: 5px;
+}
+.infoText h3 {
+    margin-top: 10px;
+}
+.infoText p {
+    margin-top: 10px;
+}
+.info-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.info-btn button {
+    width: 30%;
+    margin: 5px 10px;
+}
+
+.familyMembers {
+    margin: 15px 0 15px 0;
+    padding-left: 15%;
+}
+.familyMembers h1 {
+    float: left;
+}
+.familyMembers table {
+    margin-top: 10px;
+    border: 1px solid black;
+    width: 80%;
+}
+.familyMembers table tr{
+    background-color: wheat;
+}
+.familyMembers table th {
+    border: 1px solid black;
+    text-align: center;
+}
+.familyMembers table td {
+    border: 1px solid black;
+    text-align: center;
+}
